@@ -1,4 +1,7 @@
 from pydantic import BaseSettings
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class Settings(BaseSettings):
@@ -10,7 +13,7 @@ class Settings(BaseSettings):
     POSTGRES_HOSTNAME: str
 
     class Config:
-        env_file = "../.env"
+        env_file = f"{Path(__file__).resolve().parent.parent}/.env"
 
 
 settings = Settings()

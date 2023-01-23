@@ -1,6 +1,6 @@
 from sqlalchemy.types import  String, Numeric
 from sqlalchemy.sql.schema import Column
-from db  import Base
+from app.db  import Base
 
 import uuid
 from sqlalchemy import TIMESTAMP, Column, ForeignKey, String, Boolean, text

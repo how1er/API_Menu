@@ -1,11 +1,8 @@
 from fastapi import FastAPI
-
-from  routers import menus, submenus, dishes
+from  app.routers import menus, submenus, dishes
 
 
 app = FastAPI()
-
-
 
 
 

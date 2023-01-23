@@ -1,10 +1,11 @@
 
-from models import SubMenu
-from db import get_db
+from app.models import SubMenu
+from app.db import get_db
+from app.schemas import CreateSubMenu, SubMenuInfo
 
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
-from schemas import CreateSubMenu, SubMenuInfo
+
 
 
 router = APIRouter()

@@ -1,9 +1,10 @@
-from models import Dish
-from db import get_db
+from app.models import Dish
+from app.db import get_db
+from app.schemas import CreateDish, DishInfo
+
 
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
-from schemas import CreateDish, DishInfo
 
 
 router = APIRouter()

@@ -1,6 +1,6 @@
-from schemas import MenuInfo, CreateMenu
-from models import Menu
-from db import get_db
+from app.schemas import MenuInfo, CreateMenu
+from app.models import Menu
+from app.db import get_db
 
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
