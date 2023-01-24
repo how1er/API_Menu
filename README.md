@@ -27,6 +27,15 @@
 
 ## Установка и запуск
 
+
+## С помощью Docker
+
+````
+docker-compose build
+docker compose up
+````
+## Без Docker
+
 1. Склонировать репозиторий с Github:
 
 ````
