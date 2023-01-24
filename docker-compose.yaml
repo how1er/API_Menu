@@ -27,6 +27,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgre22
       - POSTGRES_DB=python_db
+      - POSTGRES_TESTDB=test_db
     expose:
       - "5432"
     ports:
@@ -38,6 +39,22 @@ services:
       interval: 5s
       timeout: 20s
       retries: 100
+  test:
+    container_name: "test"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    entrypoint: >
+      sh -c "
+        python -m pytest
+      "
+    networks:
+      - mynetwork
+    depends_on:
+      db:
+        condition: service_healthy
 networks:
   mynetwork:
     driver: bridge
