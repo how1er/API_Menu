@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
-    environment:
-      - TEST=1
+    # environment:
+    #   - TEST=1
     entrypoint: >
       sh -c "
         python -m alembic upgrade head
@@ -28,8 +28,8 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgre22
-      - POSTGRES_DB=python_db
-      - POSTGRES_TESTDB=test_db
+      #- POSTGRES_DB=python_db
+      - POSTGRES_DB=test_db
     expose:
       - 5432
     networks:
@@ -37,7 +37,7 @@ services:
     ports:
       - "5432:5432"
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_TESTDB} -U ${POSTGRES_USER}" ]
+      test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}" ]
       interval: 5s
       timeout: 20s
       retries: 100
