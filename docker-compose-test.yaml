@@ -1,7 +1,7 @@
 version: "3.8"
 services:
-  test_app:
-    container_name: test_app
+  test:
+    container_name: api_test
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,24 +15,25 @@ services:
         python -m pytest -vv
       "
     networks:
-      - my_test_network
+      - api_test
     ports:
       - "8000:8000"
     depends_on:
-      test-db:
+      db:
         condition: service_healthy
-  test-db:
+  db:
     container_name: "postgre_db"
     image: postgres:15-alpine
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgre22
+      - POSTGRES_DB=python_db
       - POSTGRES_TESTDB=test_db
     expose:
       - 5432
     networks:
-      - my_test_network
+      - api_test
     ports:
       - "5432:5432"
     healthcheck:
@@ -42,5 +43,5 @@ services:
       retries: 100
 
 networks:
-  my_test_network:
+  api_test:
     driver: bridge
