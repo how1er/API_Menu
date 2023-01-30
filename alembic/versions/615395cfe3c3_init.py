@@ -1,7 +1,7 @@
 """init
 
 Revision ID: 615395cfe3c3
-Revises: 
+Revises:
 Create Date: 2023-01-21 16:28:34.527198
 
 """
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '615395cfe3c3'
+revision = "615395cfe3c3"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -18,39 +18,39 @@ depends_on = None
 
 from sqlalchemy.dialects import postgresql
 
+
 def upgrade() -> None:
     op.create_table(
-        'menus',
-        sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
-        sa.Column('title', sa.String(), nullable=False),
-        sa.Column('description', sa.String(), nullable=False),
-        sa.PrimaryKeyConstraint('id')
-   
+        "menus",
+        sa.Column("id", postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column("title", sa.String(), nullable=False),
+        sa.Column("description", sa.String(), nullable=False),
+        sa.PrimaryKeyConstraint("id"),
     )
 
     op.create_table(
-        'submenus',
-        sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
-        sa.Column('menu_id', postgresql.UUID(as_uuid=True), nullable=False),
-        sa.Column('title', sa.String(), nullable=False),
-        sa.Column('description', sa.String(), nullable=False),
-        sa.ForeignKeyConstraint(['menu_id'], ['menus.id'], ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
+        "submenus",
+        sa.Column("id", postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column("menu_id", postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column("title", sa.String(), nullable=False),
+        sa.Column("description", sa.String(), nullable=False),
+        sa.ForeignKeyConstraint(["menu_id"], ["menus.id"], ondelete="CASCADE"),
+        sa.PrimaryKeyConstraint("id"),
     )
 
     op.create_table(
-        'dishes',
-        sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False),
-        sa.Column('submenu_id', postgresql.UUID(as_uuid=True), nullable=False),
-        sa.Column('title', sa.String(), nullable=False),
-        sa.Column('description', sa.String(), nullable=False),
-        sa.Column('price', sa.String(),  nullable=False),
-        sa.ForeignKeyConstraint(['submenu_id'], ['submenus.id'], ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
+        "dishes",
+        sa.Column("id", postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column("submenu_id", postgresql.UUID(as_uuid=True), nullable=False),
+        sa.Column("title", sa.String(), nullable=False),
+        sa.Column("description", sa.String(), nullable=False),
+        sa.Column("price", sa.String(), nullable=False),
+        sa.ForeignKeyConstraint(["submenu_id"], ["submenus.id"], ondelete="CASCADE"),
+        sa.PrimaryKeyConstraint("id"),
     )
 
 
 def downgrade() -> None:
-    op.drop_table('menus')
-    op.drop_table('submenus')
-    op.drop_table('dishes')
+    op.drop_table("menus")
+    op.drop_table("submenus")
+    op.drop_table("dishes")

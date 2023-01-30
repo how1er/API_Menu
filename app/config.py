@@ -14,6 +14,10 @@ class Settings(BaseSettings):
 
     POSTGRES_TESTDB: str
 
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_DB: int
+
     class Config:
         env_file = f"{Path(__file__).resolve().parent.parent}/.env"
 

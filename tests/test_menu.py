@@ -1,8 +1,8 @@
-
 import json
 
 
 from app.models import Menu
+
 
 class TestMenu:
     def test_create_menu(self, client, menu):
@@ -13,12 +13,11 @@ class TestMenu:
         assert resp_data["description"] == menu["description"]
         assert resp_data["submenus_count"] == 0
         assert resp_data["dishes_count"] == 0
-    
+
     def test_get_menu(self, client, create_menu_list):
         resp = client.get(f"/api/v1/menus/")
         assert len(resp.json()) == 3
 
-    
     def test_get_menu_by_id(self, client, menu, create_menu, db):
         create_menu(db, menu)
         last_menu = db.query(Menu).first()
@@ -31,7 +30,7 @@ class TestMenu:
         assert resp_data["description"] == menu["description"]
         assert resp_data["submenus_count"] == 0
         assert resp_data["dishes_count"] == 0
-    
+
     def test_update_menu(self, client, menu, create_menu, db):
         new_data = {"title": "Updated title", "description": "Updated description"}
         create_menu(db, menu)
@@ -44,7 +43,7 @@ class TestMenu:
         assert resp_data["description"] == new_data["description"]
         assert resp_data["submenus_count"] == 0
         assert resp_data["dishes_count"] == 0
-    
+
     def test_delete_menu(self, client, create_menu, menu, db):
         create_menu(db, menu)
         last_menu = db.query(Menu).first()

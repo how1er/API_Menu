@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 import uuid
 
+
 class CreateMenu(BaseModel):
     title: str
     description: str
@@ -12,10 +13,10 @@ class MenuInfo(BaseModel):
     description: str
     submenus_count: int
     dishes_count: int
- 
 
     class Config:
         orm_mode = True
+
 
 class CreateSubMenu(BaseModel):
     title: str
@@ -27,11 +28,9 @@ class SubMenuInfo(BaseModel):
     title: str
     description: str
     dishes_count: int
- 
 
     class Config:
         orm_mode = True
-
 
 
 class CreateDish(BaseModel):
@@ -45,7 +44,6 @@ class DishInfo(BaseModel):
     title: str
     description: str
     price: str
- 
 
     class Config:
         orm_mode = True
