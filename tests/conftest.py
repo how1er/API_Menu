@@ -31,7 +31,7 @@ def db(db_engine):
     connection = db_engine.connect()
 
     # begin a non-ORM transaction
-    transaction = connection.begin()
+    connection.begin()
 
     # bind an individual Session to the connection
     db = Session(bind=connection)
@@ -55,7 +55,8 @@ def client(db):
 def create_menu(db, menu):
     def create_menu(db, menu):
         crud.create_menu(
-            schemas.CreateMenu(title=menu["title"], description=menu["description"]), db
+            schemas.CreateMenu(
+                title=menu["title"], description=menu["description"]), db
         )
 
     return create_menu

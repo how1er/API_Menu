@@ -5,6 +5,7 @@ Revises:
 Create Date: 2023-01-21 16:28:34.527198
 
 """
+from sqlalchemy.dialects import postgresql
 from alembic import op
 import sqlalchemy as sa
 
@@ -14,9 +15,6 @@ revision = "615395cfe3c3"
 down_revision = None
 branch_labels = None
 depends_on = None
-
-
-from sqlalchemy.dialects import postgresql
 
 
 def upgrade() -> None:
@@ -45,7 +43,8 @@ def upgrade() -> None:
         sa.Column("title", sa.String(), nullable=False),
         sa.Column("description", sa.String(), nullable=False),
         sa.Column("price", sa.String(), nullable=False),
-        sa.ForeignKeyConstraint(["submenu_id"], ["submenus.id"], ondelete="CASCADE"),
+        sa.ForeignKeyConstraint(
+            ["submenu_id"], ["submenus.id"], ondelete="CASCADE"),
         sa.PrimaryKeyConstraint("id"),
     )
 

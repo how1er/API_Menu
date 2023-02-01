@@ -1,9 +1,6 @@
-from sqlalchemy.types import String, Numeric
-from sqlalchemy.sql.schema import Column
 from app.db import Base
-
 import uuid
-from sqlalchemy import TIMESTAMP, Column, ForeignKey, String, Boolean, text
+from sqlalchemy import Column, ForeignKey, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.hybrid import hybrid_property

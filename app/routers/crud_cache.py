@@ -1,5 +1,4 @@
 import json
-from typing import Union
 from app.cache import AbstractCache
 
 
@@ -9,7 +8,7 @@ def set_item(cache: AbstractCache, type_: str, item: dict) -> None:
     cache.set(key, json.dumps(item))
 
 
-def get_item(cache: AbstractCache, type_: str, id_: str) -> Union[dict, None]:
+def get_item(cache: AbstractCache, type_: str, id_: str) -> dict | None:
     key = f"{type_}:{id_}"
     item = cache.get(key)
     return json.loads(item) if item else None
@@ -19,7 +18,7 @@ def set_list(cache: AbstractCache, key: str, items: list):
     cache.set(key, json.dumps(items))
 
 
-def get_list(cache: AbstractCache, key: str) -> Union[list, None]:
+def get_list(cache: AbstractCache, key: str) -> list | None:
     items = cache.get(key)
     return json.loads(items) if items else None
 

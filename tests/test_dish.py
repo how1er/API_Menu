@@ -9,7 +9,8 @@ class TestDish:
         resp = client.post("/api/v1/menus/", data=json.dumps(menu))
         last_menu = db.query(Menu).first()
         menu_id = str(last_menu.id)
-        client.post(f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
+        client.post(
+            f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
         last_submenu = db.query(SubMenu).first()
         submenu_id = str(last_submenu.id)
         resp = client.post(
@@ -26,7 +27,8 @@ class TestDish:
         create_menu(db, menu)
         last_menu = db.query(Menu).first()
         menu_id = str(last_menu.id)
-        client.post(f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
+        client.post(
+            f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
         last_submenu = db.query(SubMenu).first()
         submenu_id = str(last_submenu.id)
         client.post(
@@ -54,7 +56,8 @@ class TestDish:
         create_menu(db, menu)
         last_menu = db.query(Menu).first()
         menu_id = str(last_menu.id)
-        client.post(f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
+        client.post(
+            f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
         last_submenu = db.query(SubMenu).first()
         submenu_id = str(last_submenu.id)
         client.post(
@@ -77,7 +80,8 @@ class TestDish:
         create_menu(db, menu)
         last_menu = db.query(Menu).first()
         menu_id = str(last_menu.id)
-        client.post(f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
+        client.post(
+            f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
         last_submenu = db.query(SubMenu).first()
         submenu_id = str(last_submenu.id)
         client.post(
@@ -91,4 +95,4 @@ class TestDish:
         )
         assert resp.status_code == 200
         resp_data = resp.json()
-        assert resp_data["success"] == True
+        assert resp_data["success"] is True

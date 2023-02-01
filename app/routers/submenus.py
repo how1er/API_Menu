@@ -2,7 +2,7 @@ from app.db import get_db
 from app.schemas import CreateSubMenu, SubMenuInfo
 
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from app.cache import get_cache, AbstractCache
 from app.routers import service
 
@@ -10,12 +10,12 @@ router = APIRouter()
 
 
 @router.get("/", response_model=list[SubMenuInfo])
-def get_submenu(
+def get_submenus(
     target_menu_id: str,
     db: Session = Depends(get_db),
     cache: AbstractCache = Depends(get_cache),
 ):
-    return service.get_submenu(target_menu_id, db, cache)
+    return service.get_submenus(target_menu_id, db, cache)
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=SubMenuInfo)
@@ -36,17 +36,17 @@ def get_submenu_by_id(
 
 
 @router.delete("/{id}")
-def delete_submenu(
-    id: str, db: Session = Depends(get_db), cache: AbstractCache = Depends(get_cache)
+def delete_submenu_by_id(
+    id: str, target_menu_id: str, db: Session = Depends(get_db), cache: AbstractCache = Depends(get_cache)
 ):
-    return service.delete_submenu(id, db, cache)
+    return service.delete_submenu_by_id(id, target_menu_id, db, cache)
 
 
 @router.patch("/{id}", response_model=SubMenuInfo)
-def update_submenu(
+def update_submenu_by_id(
     id: str,
-    menu: CreateSubMenu,
+    submenu: CreateSubMenu,
     db: Session = Depends(get_db),
     cache: AbstractCache = Depends(get_cache),
 ):
-    return service.update_submenu(id, menu, db, cache)
+    return service.update_submenu_by_id(id, submenu, db, cache)

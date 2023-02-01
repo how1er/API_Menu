@@ -1,12 +1,10 @@
 from redis.client import Redis
 from abc import ABC, abstractmethod
 
-from typing import Union
-
 
 class AbstractCache(ABC):
     def __init__(self, cache_instance):
-        self.cache: Union[dict, Redis] = cache_instance
+        self.cache: dict | Redis = cache_instance
 
     @abstractmethod
     def get(self, key: str):
@@ -16,8 +14,8 @@ class AbstractCache(ABC):
     def set(
         self,
         key: str,
-        value: Union[bytes, str],
-        expire: int = 30,
+        value: bytes | str,
+        expire: int = 600,
     ):
         pass
 
@@ -38,20 +36,20 @@ class RedisCache(AbstractCache):
     def set(
         self,
         key: str,
-        value: Union[bytes, str],
-        expire: int = 30,
+        value: bytes | str,
+        expire: int = 600,
     ):
         self.cache.set(name=key, value=value, ex=expire)
 
-    async def remove(self, key: str):
+    def remove(self, key: str):
         self.cache.delete(key)
 
-    async def close(self):
+    def close(self):
         self.cache.close()
 
 
-cache: Union[AbstractCache, None] = None
+cache: AbstractCache | None = None
 
 
-async def get_cache() -> AbstractCache:
+def get_cache() -> AbstractCache:
     return RedisCache(cache)

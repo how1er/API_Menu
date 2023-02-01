@@ -22,7 +22,8 @@ class TestSubMenu:
         create_menu(db, menu)
         last_menu = db.query(Menu).first()
         menu_id = str(last_menu.id)
-        client.post(f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
+        client.post(
+            f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
         last_submenu = db.query(SubMenu).first()
         submenu_id = str(last_submenu.id)
         resp = client.get(f"/api/v1/menus/{menu_id}/submenus/{submenu_id}/")
@@ -34,11 +35,13 @@ class TestSubMenu:
         assert resp_data["dishes_count"] == 0
 
     def test_update_submenu(self, client, menu, submenu, create_menu, db):
-        new_data = {"title": "Updated title", "description": "Updated description"}
+        new_data = {"title": "Updated title",
+                    "description": "Updated description"}
         create_menu(db, menu)
         last_menu = db.query(Menu).first()
         menu_id = str(last_menu.id)
-        client.post(f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
+        client.post(
+            f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
         last_submenu = db.query(SubMenu).first()
         submenu_id = str(last_submenu.id)
         resp = client.patch(
@@ -54,10 +57,11 @@ class TestSubMenu:
         create_menu(db, menu)
         last_menu = db.query(Menu).first()
         menu_id = str(last_menu.id)
-        client.post(f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
+        client.post(
+            f"/api/v1/menus/{menu_id}/submenus/", data=json.dumps(submenu))
         last_submenu = db.query(SubMenu).first()
         submenu_id = str(last_submenu.id)
         resp = client.delete(f"/api/v1/menus/{menu_id}/submenus/{submenu_id}/")
         assert resp.status_code == 200
         resp_data = resp.json()
-        assert resp_data["success"] == True
+        assert resp_data["success"] is True
