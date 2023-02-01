@@ -15,7 +15,7 @@ from app import schemas
 client = TestClient(app)
 
 
-SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_TEST}:{settings.DATABASE_PORT}/{settings.POSTGRES_TESTDB}"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_HOSTNAME}:{settings.DATABASE_PORT}/{settings.POSTGRES_TESTDB}"
 
 
 @pytest.fixture(scope="session")
