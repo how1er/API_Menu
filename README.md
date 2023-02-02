@@ -84,7 +84,7 @@ uvicorn main:app --reload
 # API
 ----------
 ## Requests:
-
+````
 Get all menus          `/api/v1/menus/`    
 Create menu            `/api/v1/menus/` 
 Get menu by id         `/api/v1/menus/{menu_id}`
@@ -99,7 +99,8 @@ Get all dishes         `/api/v1/menus/{menu_id}/submenus/{submenu_id}/dishes`
 Create dish            `/api/v1/menus/{menu_id}/submenus/{submenu_id}/dishes`                 
 Get dish by id         `/api/v1/menus/{menu_id}/submenus/{submenu_id}/dishes/{dish_id}` 
 Delete dish by id      `/api/v1/menus/{menu_id}/submenus/{submenu_id}/dishes/{dish_id}`    
-Update dish by id      `/api/v1/menus/{menu_id}/submenus/{submenu_id}/dishes/{dish_id}`          
+Update dish by id      `/api/v1/menus/{menu_id}/submenus/{submenu_id}/dishes/{dish_id}`    
+````
 ----------
 
 Документация для API доступна по адресу:
