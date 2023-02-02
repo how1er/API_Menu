@@ -19,12 +19,12 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      db:
+      test_db:
         condition: service_healthy
       redis:
         condition: service_healthy
-  db:
-    container_name: "postgre_db"
+  test_db:
+    container_name: "tests_db"
     image: postgres:15-alpine
     restart: always
     environment:
