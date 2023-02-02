@@ -89,7 +89,7 @@ Get all menus          `/api/v1/menus/`
 Create menu            `/api/v1/menus/` 
 Get menu by id         `/api/v1/menus/{menu_id}`
 Delete menu by id      `/api/v1/menus/{menu_id}`  
-Update a menu by id    `/api/v1/menus/{menu_id}`                                         
+Update menu by id      `/api/v1/menus/{menu_id}`                                         
 Get all submenus       `/api/v1/menus/{menu_id}/submenus`                                   
 Create submenu         `/api/v1/menus/{menu_id}/submenus`                                    
 Get submenu by id      `/api/v1/menus/{menu_id}/submenus/{submenu_id}`        
