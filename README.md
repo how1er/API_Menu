@@ -84,6 +84,7 @@ uvicorn main:app --reload
 # API
 ----------
 ## Requests:
+
 Get all menus          `/api/v1/menus/`    
 Create menu            `/api/v1/menus/` 
 Get menu by id         `/api/v1/menus/{menu_id}`
