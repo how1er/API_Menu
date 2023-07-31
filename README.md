@@ -27,6 +27,21 @@
 
 ## Установка и запуск
 
+
+## С помощью Docker
+
+````
+docker-compose build
+docker compose up
+````
+
+## Запуск тестов
+
+````
+docker-compose -f docker-compose-test.yaml up --build
+````
+## Без Docker
+
 1. Склонировать репозиторий с Github:
 
 ````
