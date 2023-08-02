@@ -2,56 +2,32 @@ from app.models import Dish
 from app.db import get_db
 from app.schemas import CreateDish, DishInfo
 
-
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
-
+from app.routers import crud
 
 router = APIRouter()
 
 @router.get("/", response_model=list[DishInfo])
-def get_submenu(target_submenu_id: str, db: Session = Depends(get_db)):
-    return db.query(Dish).filter(Dish.submenu_id == target_submenu_id).all()
+def get_dish(target_submenu_id: str, db: Session = Depends(get_db)):
+    return crud.get_dish(target_submenu_id, db)
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model= DishInfo)
-def create_submenu(details: CreateDish, target_submenu_id: str, db: Session = Depends(get_db)):
-    to_create = Dish(
-        submenu_id = target_submenu_id,
-        title=details.title,
-        description = details.description,
-        price = details.price
-    )
-    db.add(to_create)
-    db.commit()
-    return to_create
+def create_dish(details: CreateDish, target_submenu_id: str, db: Session = Depends(get_db)):
+    return crud.create_dish(details, target_submenu_id, db)
 
 
 @router.get("/{id}", response_model=DishInfo)
-def get_submenu_by_id(id: str, db: Session = Depends(get_db)):
-    stored_dish = db.query(Dish).filter(Dish.id == id).first()
-    if not stored_dish:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f'dish not found')
-    return stored_dish
+def get_dish_by_id(id: str, db: Session = Depends(get_db)):
+    return crud.get_dish_by_id(id, db)
     
 
-
 @router.delete("/{id}")
-def delete_menu(id: str, db: Session = Depends(get_db)):
-    db.query(Dish).filter(Dish.id == id).delete()
-    db.commit()
-    return { "success": True }
+def delete_dish(id: str, db: Session = Depends(get_db)):
+    return crud.delete_dish(id, db)
+
 
 @router.patch("/{id}", response_model=DishInfo)
 def update_dish(id: str, dish: CreateDish, db: Session = Depends(get_db)):
-    dish_query = db.query(Dish).filter(Dish.id == id)
-    stored_dish = dish_query.first()
-    if not stored_dish:
-        raise HTTPException(status_code=status.HTTP_200_OK,
-                            detail=f'No dish with this id: {id} found')
-    update_data = dish.dict(exclude_unset=True)
-    dish_query.filter(Dish.id == id).update(update_data, synchronize_session=False)
-    db.commit()
-    db.refresh(stored_dish)
-    return stored_dish
+    return crud.update_dish(id, dish, db)

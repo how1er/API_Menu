@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str
     POSTGRES_HOSTNAME: str
 
+    POSTGRES_TESTDB: str
+
     class Config:
         env_file = f"{Path(__file__).resolve().parent.parent}/.env"
 
