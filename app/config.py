@@ -11,8 +11,13 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     POSTGRES_HOST: str
     POSTGRES_HOSTNAME: str
+    POSTGRES_TEST: str
 
     POSTGRES_TESTDB: str
+
+    REDIS_HOST: str
+    REDIS_PORT: int
+    REDIS_DB: int
 
     class Config:
         env_file = f"{Path(__file__).resolve().parent.parent}/.env"

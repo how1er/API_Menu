@@ -19,6 +19,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      redis:
+        condition: service_healthy
   db:
     container_name: "postgre_db"
     image: postgres:15-alpine
@@ -35,6 +37,22 @@ services:
       - FastAPI_Menu
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}" ]
+      interval: 5s
+      timeout: 20s
+      retries: 100
+  redis:
+    container_name: "redis_cache"
+    image: redis:7-alpine
+    environment:
+      - REDIS_PORT=6379
+    networks:
+      - FastAPI_Menu
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 5s
       timeout: 20s
       retries: 100
